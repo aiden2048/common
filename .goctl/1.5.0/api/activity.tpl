@@ -18,7 +18,7 @@ import (
 	"github.com/aiden2048/pkg/public/errorMsg"
 	"github.com/aiden2048/pkg/public/redisDeal"
 	"github.com/aiden2048/pkg/public/redisKeys"
-	"github.com/aiden2048/pkg/qgframe/logs"
+	"github.com/aiden2048/pkg/frame/logs"
 	jsoniter "github.com/json-iterator/go"
 )
 

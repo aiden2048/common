@@ -3,7 +3,7 @@ package handler
 
 import (
 	{{if .notOnlyEvents}}"context"
-	"github.com/aiden2048/pkg/qgframe"
+	"github.com/aiden2048/pkg/frame"
 	"github.com/aiden2048/pkg/public/natsHandle"{{end}}
 	{{if .hasEvent}}"github.com/aiden2048/common/public/events"
 	"github.com/aiden2048/pkg/public/natsStream"{{end}}

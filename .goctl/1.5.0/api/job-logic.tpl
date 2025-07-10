@@ -1,7 +1,7 @@
 package {{.pkgName}}
 
 import (
-	"github.com/aiden2048/pkg/qgframe"
+	"github.com/aiden2048/pkg/frame"
 	"github.com/aiden2048/pkg/public/errorMsg"
 	"github.com/aiden2048/common/serviceApi/jobSchedApi"
 	{{if .hasEvent}}"github.com/aiden2048/common/public/events"{{end}}
@@ -10,10 +10,10 @@ import (
 
 type {{.logic}} struct {
 	ctx    context.Context
-	r *qgframe.{{.msg}}
+	r *frame.{{.msg}}
 }
 
-func New{{.logic}}Obj(ctx context.Context, r *qgframe.{{.msg}}) *{{.logic}} {
+func New{{.logic}}Obj(ctx context.Context, r *frame.{{.msg}}) *{{.logic}} {
 	return &{{.logic}}{
 		ctx:    ctx,
 		r: r,

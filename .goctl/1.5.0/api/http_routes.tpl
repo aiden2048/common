@@ -4,7 +4,7 @@ package handler
 import (
 	"context"
 	"github.com/aiden2048/pkg/public/httpHandle"
-	"github.com/aiden2048/pkg/qgframe"
+	"github.com/aiden2048/pkg/frame"
 	"github.com/fasthttp/router"
 	"github.com/valyala/fasthttp"
 	{{.importPackages}}

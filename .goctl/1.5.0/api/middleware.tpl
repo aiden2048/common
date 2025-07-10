@@ -9,8 +9,8 @@ import (
 
 	"github.com/aiden2048/common/serviceApi/connApi"
 	"github.com/aiden2048/pkg/public/httpHandle"
-	"github.com/aiden2048/pkg/qgframe"
-	"github.com/aiden2048/pkg/qgframe/logs"
+	"github.com/aiden2048/pkg/frame"
+	"github.com/aiden2048/pkg/frame/logs"
 	"github.com/aiden2048/pkg/utils"
 	"github.com/aiden2048/pkg/utils/baselib"
 	"github.com/valyala/fasthttp"
@@ -18,8 +18,8 @@ import (
 
 var NoLoginFunc = []string{"login"}
 
-func HttpMiddleware(ctx *fasthttp.RequestCtx, funcName string, next func(ctx context.Context, r *qgframe.NatsMsg)) {
-	msg := &qgframe.NatsMsg{}
+func HttpMiddleware(ctx *fasthttp.RequestCtx, funcName string, next func(ctx context.Context, r *frame.NatsMsg)) {
+	msg := &frame.NatsMsg{}
 
 	body := ctx.Request.Body()
 	msg.MsgData = body
@@ -56,7 +56,7 @@ func HttpMiddleware(ctx *fasthttp.RequestCtx, funcName string, next func(ctx con
 	}()
 	next(context.TODO(), msg)
 }
-func CheckLogin(ctx *fasthttp.RequestCtx, funcName string) (err error, sess *qgframe.Session) {
+func CheckLogin(ctx *fasthttp.RequestCtx, funcName string) (err error, sess *frame.Session) {
 	token := string(ctx.Request.Header.Peek("token"))
 	if token == "" {
 		if !utils.InArray(NoLoginFunc, funcName) {
@@ -64,7 +64,7 @@ func CheckLogin(ctx *fasthttp.RequestCtx, funcName string) (err error, sess *qgf
 			return
 		}
 		appId, _ := strconv.Atoi(string(ctx.Request.Header.Peek("app_id")))
-		sess = qgframe.NewSessionOnlyApp(int32(appId))
+		sess = frame.NewSessionOnlyApp(int32(appId))
 		return
 	}
 	err, sess = connApi.CheckLoginV2(token, []string{connApi.SRC_ADMIN}, time.Now(), true)
@@ -78,7 +78,7 @@ func CheckLogin(ctx *fasthttp.RequestCtx, funcName string) (err error, sess *qgf
 	}
 	return nil, sess
 }
-func checkPermissions(ctx *fasthttp.RequestCtx, funcName string, sess *qgframe.Session) bool {
+func checkPermissions(ctx *fasthttp.RequestCtx, funcName string, sess *frame.Session) bool {
 	if strings.HasPrefix(funcName, "NA.") {
 		return true
 	}

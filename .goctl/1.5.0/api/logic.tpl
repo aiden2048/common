@@ -1,7 +1,7 @@
 package {{.pkgName}}
 
 import (
-	{{if not .hasEvent}}"github.com/aiden2048/pkg/qgframe"{{end}}
+	{{if not .hasEvent}}"github.com/aiden2048/pkg/frame"{{end}}
 	"github.com/aiden2048/pkg/public/errorMsg"
 	{{if .hasEvent}}"github.com/aiden2048/common/public/events"
 	"context"{{end}}
@@ -11,10 +11,10 @@ import (
 type {{.logic}} struct {
 
 	ctx    context.Context
-	{{if not .hasEvent}}r *qgframe.{{.msg}}{{end}}
+	{{if not .hasEvent}}r *frame.{{.msg}}{{end}}
 }
 
-func New{{.logic}}Obj({{if not .hasEvent}}ctx context.Context, r *qgframe.{{.msg}}{{end}}) *{{.logic}} {
+func New{{.logic}}Obj({{if not .hasEvent}}ctx context.Context, r *frame.{{.msg}}{{end}}) *{{.logic}} {
 	{{if not .hasEvent}}return &{{.logic}}{
 		ctx:    ctx,
 		r: r,

@@ -13,8 +13,8 @@ import (
 	"github.com/aiden2048/common/serviceApi/lockerSvrApi"
 	"github.com/aiden2048/pkg/public/errorMsg"
 	"github.com/aiden2048/pkg/public/redisKeys"
-	"github.com/aiden2048/pkg/qgframe"
-	"github.com/aiden2048/pkg/qgframe/logs"
+	"github.com/aiden2048/pkg/frame"
+	"github.com/aiden2048/pkg/frame/logs"
 	jsoniter "github.com/json-iterator/go"
 )
 
@@ -24,7 +24,7 @@ type Activity struct {
 	selfConfig SelfConfig
 }
 
-func NewService(ctx context.Context, sess *qgframe.Session, config *configModel.CAgentActivityConfig) baseActivity.ActivityService {
+func NewService(ctx context.Context, sess *frame.Session, config *configModel.CAgentActivityConfig) baseActivity.ActivityService {
 	cfg := SelfConfig{}
 	if config.Config == "" {
 		return nil

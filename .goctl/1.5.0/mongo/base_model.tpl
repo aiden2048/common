@@ -5,7 +5,7 @@ import (
     "context"
     "fmt"
     "github.com/aiden2048/pkg/public/mongodb"
-	"github.com/aiden2048/pkg/qgframe/logs"
+	"github.com/aiden2048/pkg/frame/logs"
     "go.mongodb.org/mongo-driver/mongo"
     "go.mongodb.org/mongo-driver/bson"
     "go.mongodb.org/mongo-driver/bson/primitive"
