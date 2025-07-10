@@ -1,0 +1,20 @@
+info(
+	title : 账变类型配置
+	tag : 基础配置
+	tabName:c_service_optcode
+	dbName:mg_config_%d
+	index:updated_at
+	uniqueIndex:app_id,code
+	cache:false
+)
+
+type (
+	def {
+		Code   int    `json:"code" bson:"code"` // 账变类型代码
+		Name   string `json:"name" bson:"name"` // 类型名称
+		Status int    `json:"status" bson:"status"` // 状态
+		Desc   string `json:"desc" bson:"desc"` // 说明
+		Class  int    `json:"class" bson:"class"` // 分类
+		Wallet int    `json:"wallet" bson:"wallet"` // 钱包
+	}
+)

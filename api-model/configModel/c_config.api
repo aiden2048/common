@@ -1,0 +1,23 @@
+info(
+	title: 配置信息
+	tag: 基础配置
+	modelName: rootConfigModel
+	desc: 配置信息
+	tabName:c_config
+	dbName:mg_config_%d
+	index:app_id
+	uniqueIndex:plat_id,app_id,key
+	cache:false
+)
+
+
+type (
+	def {
+		Type          int64  `bson:"type" json:"type"` //  0没有归类 1运营配置 2财务配置 3防刷配置 4弹窗配置
+		Key           string `bson:"key" json:"key"`                                                                       //  key
+		Value         string `bson:"value" json:"value"`                                                                   //  value
+		Desc          string `bson:"desc" json:"desc"`                                                                        //  备注
+		Opt           int64  `bson:"opt" json:"opt"`                                                                                 //  操作人
+	}
+)
+
