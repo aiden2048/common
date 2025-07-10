@@ -1,0 +1,3 @@
+package {{.PKG}}
+{{.ImportStr}}
+{{.TypeStr}}
