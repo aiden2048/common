@@ -1,0 +1,46 @@
+info(
+	title: App配置
+	tag: 基础配置
+	tabName: c_apps
+	dbName: mg_config_%d
+	modelName: configModel
+	uniqueIndex: app_id
+	cache: false
+)
+
+type (
+	def {
+		PlatId                int32              `json:"plat_id" bson:"plat_id"`
+		AppId                 int32              `json:"app_id" bson:"app_id"`
+		Name                  string    	   `json:"name" bson:"name"` // 盘口名称
+		Code                  string 	   `json:"code" bson:"code"` // 盘口代码
+		Desc                  string `json:"desc" bson:"desc"` // 说明
+		Status                int    `json:"status" bson:"status"` // 状态
+		PointRatio       int    `json:"point_ratio" bson:"point_ratio"` // 法币精度
+		Currency         string `json:"currency" bson:"currency"` // 货币代码
+		PointType        int32  `json:"point_type" bson:"point_type"` // 钱包币种id
+		Country  string  `json:"country" bson:"country"` // 国家
+		TimeZone int32   `json:"time_zone" bson:"time_zone"` // 时区(-12~+12)
+		Lang     []int32 `json:"lang" bson:"lang"` // 支持语言,desc=语言ID数组  枚举 
+		UsdtRate     float64 `json:"usdt_rate" bson:"usdt_rate"` // 换U汇率,用来计算包网账单
+		SaleType     int     `json:"sale_type" bson:"sale_type"` // 包网分类,数字自定义分类; 0对内 1合作 2对外
+		Owner        string  `json:"owner" bson:"owner"` // 包主信息
+		ServerCost   int     `json:"server_cost" bson:"server_cost"` // 服务器费用(美元)
+		SmsCost      float64 `json:"sms_cost" bson:"sms_cost"` // 短信单价(美元)
+		ExtGameRate  int     `json:"ext_game_rate" bson:"ext_game_rate"` // 技术服务费(千分之)
+	}
+
+	AppCountryInfo {
+		Acode         string `json:"acode"`           // 区号
+		CountryName   string `json:"country_name"`    // 国家名称
+		CountryCode   string `json:"country_code"`    // 国家缩写
+		FiatPointType int32  `json:"fiat_point_type"` // 法币币种
+		FiatPointIcon string `json:"fiat_point_icon"` // 盘口货币icon
+	}
+)
+
+const (
+	DisplayGameCurrModeNil = 0
+	DisplayGameCurrModeCustomize = 1
+	DisplayGameCurrModeFixedAppCurr = 2
+)
