@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"fmt"
-
 	"github.com/aiden2048/pkg/public/mongodb"
 	"go.mongodb.org/mongo-driver/bson"
 
@@ -36,32 +35,28 @@ var cAppsExpireIndexKey = []string{}
 // 表结构
 
 type CApps struct {
-	ID                    primitive.ObjectID `json:"_id,omitempty" bson:"_id"`
-	PlatId                int32              `json:"plat_id" bson:"plat_id"`
-	AppId                 int32              `json:"app_id" bson:"app_id"`
-	Name                  string             `json:"name" bson:"name"`                                         //required, 名称, 手动输入 盘口名字
-	Code                  string             `json:"code" bson:"code"`                                         //required, Code, 盘口别名 类似 MB  用于自动生成后台账户名字前缀 外接游戏进入时候用户名
-	WalletType            int                `json:"wallet_type" bson:"wallet_type"`                           //required, 钱包类型,default=0
-	ExchangeBonus         int                `json:"exchange_bonus" bson:"exchange_bonus"`                     //required, 彩金兑出倍数限制,default=0,  0 不限制全部兑出，n 获取彩金的n倍兑出
-	ExchangeOverBonusCode int                `json:"exchange_over_bonus_code" bson:"exchange_over_bonus_code"` //required, 彩金兑出多余彩金打码倍数,default=0,  0 直接清空多余彩金 n 重新添加彩金并且添加n倍打码
-	ManualExchangeBonus   int                `json:"manual_exchange_bonus" bson:"manual_exchange_bonus"`       //required, 彩金兑换方式,default=0,  0:自动，1:手动
-	Desc                  string             `json:"desc" bson:"desc"`                                         //说明, 盘口备注,一般用于说明盘口谁介绍来的
-	Status                int                `json:"status" bson:"status"`                                     //required,default=1, 状态, 0:关闭 1:正常 2:只开启后台,enum=0,enum=1,enum=2,default=1
-	PointRatio            int                `json:"point_ratio" bson:"point_ratio"`                           //法币精度, APP的法币精度比例，默认10000金币:1RMB,default=10000
-	Currency              string             `json:"currency" bson:"currency"`                                 //货币代码, APP的基础货币代码
-	PointType             int32              `json:"point_type" bson:"point_type"`                             //钱包币种id, 钱包币种id
-	Country               string             `json:"country" bson:"country"`                                   //国家
-	TimeZone              int32              `json:"time_zone" bson:"time_zone"`                               //时区(-12~+12)
-	Lang                  []int32            `json:"lang" bson:"lang"`                                         //required, 支持语言, 语言ID数组  枚举 https://bjmqf12dh24.sg.larksuite.com/wiki/MKDawIHqQirhtTk4QPhlV9Ing9g
-	UsdtRate              float64            `json:"usdt_rate" bson:"usdt_rate"`                               //default=1, 换U汇率, 用来计算包网账单
-	SaleType              int                `json:"sale_type" bson:"sale_type"`                               //default=0, 包网分类, 数字自定义分类; 0对内 1合作 2对外
-	Owner                 string             `json:"owner" bson:"owner"`                                       //包主信息
-	ServerCost            int                `json:"server_cost" bson:"server_cost"`                           //default=10000, 服务器费用(美元), 按月付款
-	SmsCost               float64            `json:"sms_cost" bson:"sms_cost"`                                 //default=0.015, 短信单价(美元)
-	ExtGameRate           int                `json:"ext_game_rate" bson:"ext_game_rate"`                       //default=40, 技术服务费(千分之), *1000(千分之);统一收取;包括自研游戏
-	Idate                 int64              `json:"idate,omitempty" bson:"idate,omitempty"`
-	CreatedAt             time.Time          `json:"created_at,omitempty" bson:"created_at"`
-	UpdatedAt             time.Time          `json:"updated_at,omitempty" bson:"updated_at"`
+	ID          primitive.ObjectID `json:"_id,omitempty" bson:"_id"`
+	PlatId      int32              `json:"plat_id" bson:"plat_id"`
+	AppId       int32              `json:"app_id" bson:"app_id"`
+	Name        string             `json:"name" bson:"name"`                   // 盘口名称
+	Code        string             `json:"code" bson:"code"`                   // 盘口代码
+	Desc        string             `json:"desc" bson:"desc"`                   // 说明
+	Status      int                `json:"status" bson:"status"`               // 状态
+	PointRatio  int                `json:"point_ratio" bson:"point_ratio"`     // 法币精度
+	Currency    string             `json:"currency" bson:"currency"`           // 货币代码
+	PointType   int32              `json:"point_type" bson:"point_type"`       // 钱包币种id
+	Country     string             `json:"country" bson:"country"`             // 国家
+	TimeZone    int32              `json:"time_zone" bson:"time_zone"`         // 时区(-12~+12)
+	Lang        []int32            `json:"lang" bson:"lang"`                   // 支持语言,desc=语言ID数组  枚举
+	UsdtRate    float64            `json:"usdt_rate" bson:"usdt_rate"`         // 换U汇率,用来计算包网账单
+	SaleType    int                `json:"sale_type" bson:"sale_type"`         // 包网分类,数字自定义分类; 0对内 1合作 2对外
+	Owner       string             `json:"owner" bson:"owner"`                 // 包主信息
+	ServerCost  int                `json:"server_cost" bson:"server_cost"`     // 服务器费用(美元)
+	SmsCost     float64            `json:"sms_cost" bson:"sms_cost"`           // 短信单价(美元)
+	ExtGameRate int                `json:"ext_game_rate" bson:"ext_game_rate"` // 技术服务费(千分之)
+	Idate       int64              `json:"idate,omitempty" bson:"idate,omitempty"`
+	CreatedAt   time.Time          `json:"created_at,omitempty" bson:"created_at"`
+	UpdatedAt   time.Time          `json:"updated_at,omitempty" bson:"updated_at"`
 }
 type AppCountryInfo struct {
 	Acode         string `json:"acode" bson:"acode"`                     // 区号
@@ -79,14 +74,13 @@ type defaultCAppsModelFromImage struct {
 func NewCAppsModelFromImage(dbPar1 int64) *defaultCAppsModelFromImage {
 	db := fmt.Sprintf(cAppsDbName, dbPar1)
 	tb := cAppsTbName
-	conn := mongodb.NewMon(db, tb, false, cAppsIndexKey, cAppsUniqueIndexKey, cAppsExpireIndexKey)
-	conn.SetDbKey(ImageRepositoryKey)
+	conn := mongodb.NewMon(db, tb, false, cAppsIndexKey, cAppsUniqueIndexKey, cAppsExpireIndexKey, ImageRepositoryKey)
 	model := &defaultCAppsModelFromImage{}
 	model.conn = conn
 	model.cache = false
 	model.NeedLog = true
 
-	conn.ReportMongoIndex(cAppsOpIndexKey, cAppsExpireIndexKey, 1741360774, 0)
+	conn.ReportMongoIndex(cAppsOpIndexKey, cAppsExpireIndexKey, 1752137935, 0)
 	return model
 }
 
@@ -104,7 +98,7 @@ func NewCAppsModel(dbPar1 int64) *defaultCAppsModel {
 	model.cache = false
 	model.NeedLog = true
 
-	conn.ReportMongoIndex(cAppsOpIndexKey, cAppsExpireIndexKey, 1741360774, 0)
+	conn.ReportMongoIndex(cAppsOpIndexKey, cAppsExpireIndexKey, 1752137935, 0)
 	return model
 }
 

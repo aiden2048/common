@@ -41,7 +41,7 @@ func GetVerSion(app_id int32) string {
 		if ver == "" {
 			ver = newVersion()
 			// 写redis
-			redisDeal.RedisDoSet(key, ver, redisDeal.RedisDataTtlMax)
+			redisDeal.RedisDoSet(key, ver, redisDeal.InfoTtlTwoMonth)
 		}
 		logs.Print("baseConfigVersion:保存版本号", app_id, ver)
 		version.Store(app_id, ver)
@@ -67,7 +67,7 @@ func PushMsgToOnline(app_id int32) {
 	//onlineapi.PushMsgToAll(commonConst.ONLINE_EVENT_CONFIG_CHANGE, ver, app_id, nil)
 
 	key := GetConfigVersionKey(app_id)
-	redisDeal.RedisDoSet(key, ver, redisDeal.RedisDataTtlMax)
+	redisDeal.RedisDoSet(key, ver, redisDeal.InfoTtlTwoMonth)
 
 }
 func newVersion() string {

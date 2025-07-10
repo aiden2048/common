@@ -4,7 +4,6 @@ package configModel
 import (
 	"context"
 	"fmt"
-
 	"github.com/aiden2048/pkg/frame/logs"
 	"github.com/aiden2048/pkg/public/mongodb"
 	"go.mongodb.org/mongo-driver/bson"
